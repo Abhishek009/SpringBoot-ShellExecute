@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 @Service
 public class FilesStorageService {
 
@@ -18,7 +20,9 @@ public class FilesStorageService {
     public void save(MultipartFile file) {
         try {
             System.out.println("File Name:"+file.getOriginalFilename());
-            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+
+
+            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()),REPLACE_EXISTING);
         } catch (Exception e) {
             if (e instanceof FileAlreadyExistsException) {
                 throw new RuntimeException("A file of that name already exists.");
