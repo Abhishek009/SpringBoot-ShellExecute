@@ -23,6 +23,7 @@ public class FilesStorageService {
 
 
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()),REPLACE_EXISTING);
+            System.out.println("Uploaded the file successfully:"+file.getOriginalFilename());
         } catch (Exception e) {
             if (e instanceof FileAlreadyExistsException) {
                 throw new RuntimeException("A file of that name already exists.");

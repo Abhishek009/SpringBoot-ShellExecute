@@ -29,8 +29,7 @@ public class FilesController {
         try {
             storageService.save(OAFile);
             storageService.save(HdfsFile);
-            message = "Uploaded the file successfully: " + OAFile.getOriginalFilename();
-            System.out.println(message);
+
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             message = "Could not upload the file: " + OAFile.getOriginalFilename() + ". Error: " + e.getMessage();
