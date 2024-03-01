@@ -20,8 +20,6 @@ public class FilesStorageService {
     public void save(MultipartFile file) {
         try {
             System.out.println("File Name:"+file.getOriginalFilename());
-
-
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()),REPLACE_EXISTING);
             System.out.println("Uploaded the file successfully:"+file.getOriginalFilename());
         } catch (Exception e) {

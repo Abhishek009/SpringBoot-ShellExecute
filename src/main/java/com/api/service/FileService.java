@@ -3,8 +3,9 @@ package com.api.service;
 import com.api.utils.StreamGobbler;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -21,7 +22,7 @@ public class FileService {
             System.out.println(System.getProperty("user.dir"));
             builder.command("D:\\Google_Drive_Rahul\\java_program\\BigData\\LearningJava\\scripts\\echo.bat");
         } else {
-            builder.command("sh", "-c", System.getProperty("user.dir")+ "/script/echo.bat");
+            builder.command("sh", "-c", "sh /somescript_path/dummyscript.sh 2024 123 125");
         }
 
         builder.directory(new File(System.getProperty("user.home")));
@@ -49,5 +50,26 @@ public class FileService {
         }
 
 
+    }
+
+    public void writeSourceCountry(String text) {
+        try (PrintStream out = new PrintStream(new FileOutputStream("/path of the file"))){
+            out.print(text+System.lineSeparator());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<String> getFileList(String path){
+        List<String> fileList = new ArrayList<String>();
+        File[] files = new File(path).listFiles();
+
+        for (File file :files){
+            if(file.isFile()){
+                fileList.add(file.getName());
+                System.out.println(file.getName());
+            }
+        }
+        return fileList;
     }
 }
